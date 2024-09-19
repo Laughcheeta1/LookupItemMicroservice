@@ -1,5 +1,4 @@
 package com.Lookup.ItemMicroservice.Item;
 
-public interface ItemController {
-
+public interface ItemService {
 }

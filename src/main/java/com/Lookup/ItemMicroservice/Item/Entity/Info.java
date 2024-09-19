@@ -1,12 +1,19 @@
 package com.Lookup.ItemMicroservice.Item.Entity;
 
-import jakarta.persistence.Embeddable;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Embeddable
 @EqualsAndHashCode
+@Builder
 public class Info {
+    // By default, all fields are set to 0
+    public Info() {
+        mainPage = 0;
+        search = 0;
+        brandPage = 0;
+    }
+
     @Field(name = "main_page")
     private int mainPage;
 
