@@ -83,12 +83,14 @@ public class ItemControllerImplementation implements ItemController{
 
     @Override
     public void updateItem(String id, ItemCreateRequest itemBasicInfoResponse) {
-
+        // TODO: create this
     }
 
     @Override
     public void deactivateItem(String id) {
-
+        Item item = itemDAO.findById(id).orElseThrow(() -> new RuntimeException("Item not found"));
+        item.setInProduction(false);
+        itemDAO.save(item);
     }
 
     private ItemBasicInfoResponse getItemBasicInfoResponse(Item item) {
