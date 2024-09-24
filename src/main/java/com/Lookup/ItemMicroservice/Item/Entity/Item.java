@@ -1,25 +1,24 @@
 package com.Lookup.ItemMicroservice.Item.Entity;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Data;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
-@Entity
 @Data
 @Document(collection = "Item")
+@Builder
 public class Item  {
     @Id
-    @Field(name = "id")
-    private ObjectId id;
+    @Field(name = "_id")
+    private String id;
 
     @Field(name = "brand")
-    private ObjectId brand;
+    private String brand;
 
     @Field(name = "code")
     private String code;
@@ -28,20 +27,19 @@ public class Item  {
     private String name;
 
     @Field(name = "gender")
-    private ObjectId gender;
+    private String gender;
 
     @Field(name = "category")
-    private ObjectId category;
+    private String category;
 
     @Field(name = "sub_category")
-    private ObjectId subCategory;
+    private String subCategory;
 
     @Field(name = "size")
-    private ObjectId size;
+    private List<String> sizes;
 
-    @ElementCollection
     @Field(name = "colours")  // TODO: save this as an array in the database
-    private List<ObjectId> colours;
+    private List<String> colours;
 
     @Field(name = "price")
     private double price;
