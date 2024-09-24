@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * Or how many times has the item has been opened.
  */
 @EqualsAndHashCode
-@Builder
 public class Info {
     // By default, all fields are set to 0
     public Info() {
