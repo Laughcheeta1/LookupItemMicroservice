@@ -3,8 +3,9 @@ package com.Lookup.ItemMicroservice;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.Lookup.ItemMicroservice"})
 public class ItemMicroserviceApplication {
 
 	public static void main(String[] args) {
