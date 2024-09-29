@@ -2,6 +2,8 @@ package com.Lookup.ItemMicroservice.Item.Entity;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -11,10 +13,11 @@ import java.util.List;
 @Data
 @Document(collection = "Item")
 @Builder
+@ToString
 public class Item  {
     @Id
     @Field(name = "_id")
-    private String id;
+    private ObjectId id;
 
     @Field(name = "brand")
     private String brand;

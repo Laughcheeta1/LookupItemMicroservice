@@ -4,7 +4,6 @@ import com.Lookup.ItemMicroservice.Item.DTO.ItemBasicInfoResponse;
 import com.Lookup.ItemMicroservice.Item.DTO.ItemCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +20,13 @@ public class ItemControllerImplementation implements ItemController {
     }
 
     @Override
-    @GetMapping()
+    @GetMapping(produces = "application/json")
     public ResponseEntity<List<ItemBasicInfoResponse>> getAllItems() {
         return ResponseEntity.ok(itemService.getAllItems());
     }
 
     @Override
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<ItemBasicInfoResponse> getItemById(@PathVariable("id") String id) {
         return ResponseEntity.ok(itemService.getItemById(id));
     }
@@ -40,7 +39,7 @@ public class ItemControllerImplementation implements ItemController {
     }
 
     @Override
-    @PostMapping()
+    @PostMapping(produces = "application/json")
     public ResponseEntity<ItemBasicInfoResponse> createItem(@RequestBody ItemCreateRequest itemBasicInfoResponse) {
         return ResponseEntity.status(HttpStatus.CREATED).body(itemService.createItem(itemBasicInfoResponse));
     }

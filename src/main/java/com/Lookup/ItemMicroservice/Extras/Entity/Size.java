@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Size {
     @Id
     @Field("_id")
-    private String id;
+    private ObjectId id;
 
     @Field("name")
     private String name;

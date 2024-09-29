@@ -14,7 +14,7 @@ public interface ItemService {
 
     ItemBasicInfoResponse createItem(ItemCreateRequest itemBasicInfoResponse);
 
-    void updateItem(String id, ItemCreateRequest itemBasicInfoResponse);
+    void updateItem(String id, ItemCreateRequest itemCreateRequest);
 
     void deactivateItem(String id);
 }

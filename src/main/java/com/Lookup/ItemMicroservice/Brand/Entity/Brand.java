@@ -1,14 +1,14 @@
-package com.Lookup.ItemMicroservice.Extras.Entity;
+package com.Lookup.ItemMicroservice.Brand.Entity;
 
-import lombok.Data;
+import lombok.Getter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Data
-@Document(collection = "Gender")
-public class Gender {
+@Getter
+@Document(collection = "Brand")
+public class Brand {
     @Id
     @Field("_id")
     private ObjectId id;

@@ -1,6 +1,6 @@
 package com.Lookup.ItemMicroservice.Item.DTO;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 
 import java.util.List;
@@ -10,15 +10,24 @@ import java.util.List;
  */
 @Builder
 public class ItemBasicInfoResponse {
+    @JsonProperty("id")
     private String id;
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("price")
     private double price;
+    @JsonProperty("gender")
     private String gender;
+    @JsonProperty("category")
     private String category;
+    @JsonProperty("subCategory")
     private String subCategory;
+    @JsonProperty("brand")
     private String brand;
+    @JsonProperty("sizes")
     private List<String> sizes;
+    @JsonProperty("colours")
     private List<String> colours;
-    private String code;
+    @JsonProperty("imageUrl")
     private String imageUrl;
 }
