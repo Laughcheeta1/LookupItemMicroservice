@@ -47,7 +47,8 @@ public class ItemControllerImplementation implements ItemController {
     @Override
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateItem(@PathVariable("id") String id, @RequestBody ItemCreateRequest itemBasicInfoResponse) {
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        itemService.updateItem(id, itemBasicInfoResponse);
+        return ResponseEntity.ok().build();
     }
 
     @Override
