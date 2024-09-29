@@ -53,6 +53,7 @@ public class ItemControllerImplementation implements ItemController {
     @Override
     @PutMapping("/{id}/deactivate")
     public ResponseEntity<Void> deactivateItem(@PathVariable("id") String id) {
-        return null;
+        itemService.deactivateItem(id);
+        return ResponseEntity.ok().build();
     }
 }
