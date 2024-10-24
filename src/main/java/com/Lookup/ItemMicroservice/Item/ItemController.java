@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public interface ItemController {  // TODO do pageable (not passing everything at the same time, do like the infinite scroll)
+public interface ItemController {
     ResponseEntity<List<ItemBasicInfoResponse>> getAllItems();
 
     ResponseEntity<ItemBasicInfoResponse> getItemById(String id);

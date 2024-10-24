@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface ColorDAO extends MongoRepository<Color, ObjectId> {
-    Optional<Color> findAllByNameIn(List<String> name);
+    List<Color> findAllByNameIn(List<String> name);
 }

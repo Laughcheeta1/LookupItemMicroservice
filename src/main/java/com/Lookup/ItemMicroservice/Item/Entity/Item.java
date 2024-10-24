@@ -1,10 +1,13 @@
 package com.Lookup.ItemMicroservice.Item.Entity;
 
+import com.Lookup.ItemMicroservice.Brand.Entity.Brand;
+import com.Lookup.ItemMicroservice.Extras.Entity.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -19,8 +22,9 @@ public class Item  {
     @Field(name = "_id")
     private ObjectId id;
 
+    @DBRef(lazy = false)
     @Field(name = "brand")
-    private String brand;
+    private Brand brand;
 
     @Field(name = "code")
     private String code;
@@ -28,20 +32,25 @@ public class Item  {
     @Field(name = "name")
     private String name;
 
+    @DBRef(lazy = false)
     @Field(name = "gender")
-    private String gender;
+    private Gender gender;
 
+    @DBRef(lazy = false)
     @Field(name = "category")
-    private String category;
+    private Category category;
 
+    @DBRef(lazy = false)
     @Field(name = "sub_category")
-    private String subCategory;
+    private SubCategory subCategory;
 
+    @DBRef(lazy = false)
     @Field(name = "size")
-    private List<String> sizes;
+    private List<Size> sizes;
 
-    @Field(name = "colours")  // TODO: save this as an array in the database
-    private List<String> colours;
+    @DBRef(lazy = false)
+    @Field(name = "colours")
+    private List<Color> colors;
 
     @Field(name = "price")
     private double price;

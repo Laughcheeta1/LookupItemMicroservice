@@ -17,7 +17,7 @@ public class ItemCreateRequest {
     private String subCategory;
     private String brand;
     private List<String> sizes;
-    private List<String> colours;
+    private List<String> colors;
     private String code;
     private String imageUrl;
 }
