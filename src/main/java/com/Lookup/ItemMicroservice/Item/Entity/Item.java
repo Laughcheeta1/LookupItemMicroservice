@@ -22,9 +22,8 @@ public class Item  {
     @Field(name = "_id")
     private ObjectId id;
 
-    @DBRef(lazy = false)
     @Field(name = "brand")
-    private Brand brand;
+    private String brand;
 
     @Field(name = "code")
     private String code;
@@ -32,25 +31,20 @@ public class Item  {
     @Field(name = "name")
     private String name;
 
-    @DBRef(lazy = false)
     @Field(name = "gender")
-    private Gender gender;
+    private String gender;
 
-    @DBRef(lazy = false)
     @Field(name = "category")
-    private Category category;
+    private String category;
 
-    @DBRef(lazy = false)
     @Field(name = "sub_category")
-    private SubCategory subCategory;
+    private String subCategory;
 
-    @DBRef(lazy = false)
     @Field(name = "size")
-    private List<Size> sizes;
+    private List<String> sizes;
 
-    @DBRef(lazy = false)
-    @Field(name = "colours")
-    private List<Color> colors;
+    @Field(name = "colours")  // TODO: save this as an array in the database
+    private List<String> colors;
 
     @Field(name = "price")
     private double price;

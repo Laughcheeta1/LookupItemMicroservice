@@ -36,7 +36,6 @@ public class ItemServiceImplementation implements ItemService{
 
     @Override
     public List<ItemBasicInfoResponse> getAllItems() {
-        // TODO: Make this in a mongoQuery instead of the controller
         return itemDAO.findAllByInProductionTrue().stream().map(
                 this::getItemBasicInfoResponse
         ).toList();
@@ -57,24 +56,24 @@ public class ItemServiceImplementation implements ItemService{
     public ItemBasicInfoResponse createItem(ItemCreateRequest itemCreateRequest) {
         Item item = Item.builder()
                 .brand(
-                        brandDAO.findByName(itemCreateRequest.getBrand()).orElseThrow(() -> new RuntimeException("Brand not found"))
+                        brandDAO.findByName(itemCreateRequest.getBrand()).orElseThrow(() -> new RuntimeException("Brand not found")).getId().toString()
                 )
                 .code(itemCreateRequest.getCode())
                 .name(itemCreateRequest.getName())
                 .gender(
-                        genderDAO.findByName(itemCreateRequest.getGender()).orElseThrow(() -> new RuntimeException("Gender not found"))
+                        genderDAO.findByName(itemCreateRequest.getGender()).orElseThrow(() -> new RuntimeException("Gender not found")).getId().toString()
                 )
                 .category(
-                        categoryDAO.findByName(itemCreateRequest.getCategory()).orElseThrow(() -> new RuntimeException("Category not found"))
+                        categoryDAO.findByName(itemCreateRequest.getCategory()).orElseThrow(() -> new RuntimeException("Category not found")).getId().toString()
                 )
                 .subCategory(
-                        subCategoryDAO.findByName(itemCreateRequest.getSubCategory()).orElseThrow(() -> new RuntimeException("SubCategory not found"))
+                        subCategoryDAO.findByName(itemCreateRequest.getSubCategory()).orElseThrow(() -> new RuntimeException("SubCategory not found")).getId().toString()
                 )
                 .sizes(
-                        sizeDAO.findAllByNameIn(itemCreateRequest.getSizes())
+                        sizeDAO.findAllByNameIn(itemCreateRequest.getSizes()).stream().map(Size::getName).toList()
                 )
                 .colors(
-                        colorDAO.findAllByNameIn(itemCreateRequest.getColors())
+                        colorDAO.findAllByNameIn(itemCreateRequest.getColors()).stream().map(Color::getName).toList()
                 )
                 .price(itemCreateRequest.getPrice())
                 .imageUrl(itemCreateRequest.getImageUrl())
@@ -98,32 +97,32 @@ public class ItemServiceImplementation implements ItemService{
         }
         if (itemCreateRequest.getBrand() != null) {
             itemDb.setBrand(
-                    brandDAO.findByName(itemCreateRequest.getBrand()).orElseThrow(() -> new RuntimeException("Brand not found"))
+                    brandDAO.findByName(itemCreateRequest.getBrand()).orElseThrow(() -> new RuntimeException("Brand not found")).getId().toString()
             );
         }
         if (itemCreateRequest.getGender() != null) {
             itemDb.setGender(
-                    genderDAO.findByName(itemCreateRequest.getGender()).orElseThrow(() -> new RuntimeException("Gender not found"))
+                    genderDAO.findByName(itemCreateRequest.getGender()).orElseThrow(() -> new RuntimeException("Gender not found")).getId().toString()
             );
         }
         if (itemCreateRequest.getCategory() != null) {
             itemDb.setCategory(
-                    categoryDAO.findByName(itemCreateRequest.getCategory()).orElseThrow(() -> new RuntimeException("Category not found"))
+                    categoryDAO.findByName(itemCreateRequest.getCategory()).orElseThrow(() -> new RuntimeException("Category not found")).getId().toString()
             );
         }
         if (itemCreateRequest.getSubCategory() != null) {
             itemDb.setSubCategory(
-                    subCategoryDAO.findByName(itemCreateRequest.getSubCategory()).orElseThrow(() -> new RuntimeException("SubCategory"))
+                    subCategoryDAO.findByName(itemCreateRequest.getSubCategory()).orElseThrow(() -> new RuntimeException("SubCategory")).getId().toString()
             );
         }
         if (itemCreateRequest.getSizes() != null) {
             itemDb.setSizes(
-                    sizeDAO.findAllByNameIn(itemCreateRequest.getSizes())
+                    sizeDAO.findAllByNameIn(itemCreateRequest.getSizes()).stream().map(Size::getName).toList()
             );
         }
         if (itemCreateRequest.getColors() != null) {
             itemDb.setColors(
-                    colorDAO.findAllByNameIn(itemCreateRequest.getColors())
+                    colorDAO.findAllByNameIn(itemCreateRequest.getColors()).stream().map(Color::getName).toList()
             );
         }
         if (itemCreateRequest.getCode() != null) {
@@ -149,26 +148,29 @@ public class ItemServiceImplementation implements ItemService{
                 .name(item.getName())
                 .price(item.getPrice())
                 .brand(
-                    item.getBrand().getName()
+                        item.getBrand()
                 )
                 .gender(
-                        item.getGender().getName()
+                        genderDAO.findById(new ObjectId(item.getGender()))
+                                .orElseThrow(() -> new RuntimeException("Gender not found")).getName()
                 )
                 .category(
-                        item.getCategory().getName()
+                        categoryDAO.findById(new ObjectId(item.getCategory()))
+                                .orElseThrow(() -> new RuntimeException("Category not found")).getName()
                 )
                 .subCategory(
-                        item.getSubCategory().getName()
+                        subCategoryDAO.findById(new ObjectId(item.getSubCategory()))
+                                .orElseThrow(() -> new RuntimeException("SubCategory not found")).getName()
                 )
                 .sizes(
-                        item.getSizes().stream()
-                                .map(Size::getName)
-                                .toList()
+                        sizeDAO.findAllByIdIn(
+                                item.getSizes().stream().map(ObjectId::new).toList()
+                        ).stream().map(Size::getName).toList()
                 )
                 .colours(
-                        item.getColors().stream()
-                                .map(Color::getName)
-                                .toList()
+                        colorDAO.findAllById(
+                                item.getColors().stream().map(ObjectId::new).toList()
+                        ).stream().map(Color::getName).toList()
                 )
                 .price(
                         item.getPrice()
