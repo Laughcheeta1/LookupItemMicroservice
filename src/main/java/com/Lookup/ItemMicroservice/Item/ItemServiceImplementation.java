@@ -70,10 +70,10 @@ public class ItemServiceImplementation implements ItemService{
                         subCategoryDAO.findByName(itemCreateRequest.getSubCategory()).orElseThrow(() -> new RuntimeException("SubCategory not found")).getId().toString()
                 )
                 .sizes(
-                        sizeDAO.findAllByNameIn(itemCreateRequest.getSizes()).stream().map(Size::getName).toList()
+                        sizeDAO.findAllByNameIn(itemCreateRequest.getSizes()).stream().map(size -> size.getId().toString()).toList()
                 )
                 .colors(
-                        colorDAO.findAllByNameIn(itemCreateRequest.getColors()).stream().map(Color::getName).toList()
+                        colorDAO.findAllByNameIn(itemCreateRequest.getColors()).stream().map(color -> color.getId().toString()).toList()
                 )
                 .price(itemCreateRequest.getPrice())
                 .imageUrl(itemCreateRequest.getImageUrl())
